@@ -1,0 +1,12 @@
+[repository]
+name = "omarchy-macos-zoom"
+authors = ["Anders"]
+
+[macos-zoom]
+description = "macOS-like full-screen zoom controls for Hyprland"
+authors = ["Anders"]
+output = "build/macos-zoom.so"
+build = [
+    "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF",
+    "cmake --build build",
+]

@@ -1,0 +1,33 @@
+-- Put these values in the hl.config({...}) call in your Omarchy Hyprland
+-- configuration. The tracking pair below selects macOS's
+-- "Continuously with Pointer" behavior.
+hl.config({
+  cursor = {
+    zoom_detached_camera = false,
+    zoom_rigid = false,
+  },
+  plugin = {
+    macos_zoom = {
+      raw_scroll = true,
+      modifier = "CTRL",
+      sensitivity = 0.01,
+      consume_scroll = true,
+      step = 1.20,
+      min_factor = 1.0,
+      max_factor = 40.0,
+      snap_threshold = 1.05,
+      toggle_factor = 2.0,
+      independent_displays = true,
+    },
+  },
+})
+
+-- Other macOS tracking modes:
+--
+-- "When Pointer Reaches Edge"
+--   cursor.zoom_detached_camera = true
+--   cursor.zoom_rigid = false
+--
+-- "To Keep Pointer Centered"
+--   cursor.zoom_detached_camera = false
+--   cursor.zoom_rigid = true
