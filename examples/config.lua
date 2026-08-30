@@ -1,4 +1,4 @@
--- Put these values in the hl.config({...}) call in your Omarchy Hyprland
+-- Put these values in an hl.config({...}) call in your Hyprland Lua
 -- configuration. The tracking pair below selects macOS's
 -- "Continuously with Pointer" behavior.
 hl.config({

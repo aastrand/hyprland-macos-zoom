@@ -1,6 +1,6 @@
-# omarchy-macos-zoom
+# hyprland-macos-zoom
 
-An Omarchy-ready Hyprland plugin for macOS-like full-screen accessibility zoom. It uses Hyprland’s compositor-native zoom camera and leaves bindings in your dotfiles.
+A native Hyprland plugin for macOS-like full-screen accessibility zoom. It uses Hyprland’s compositor-native zoom camera and leaves bindings in your configuration.
 
 The [research report](docs/report-source.md) defines the parity target and evidence. The [implementation plan](docs/plan.md) separates the implemented full-screen core from later accessibility features.
 
@@ -8,7 +8,7 @@ The [research report](docs/report-source.md) defines the parity target and evide
 
 - Hyprland 0.56.2 or a source-compatible build with matching installed headers.
 - CMake 3.27+, a C++23 compiler, `pkg-config`, and Hyprland build dependencies.
-- Omarchy’s Lua Hyprland configuration for the provided examples.
+- Hyprland’s Lua configuration for the provided examples.
 
 Hyprland plugins are ABI-coupled to the compositor build. Rebuild after every Hyprland update.
 
@@ -32,7 +32,7 @@ hyprctl eval "hl.plugin.macos_zoom.adjust('set 3.5')"
 ```
 
 The native `macos-zoom` dispatcher is also registered for legacy Hyprland
-configurations. Omarchy's Lua configuration should use the Lua API shown above.
+configurations. Lua configurations should use the Lua API shown above.
 
 Unload with an absolute path; unloading resets every output to 1×.
 
@@ -42,13 +42,13 @@ hyprctl plugin unload "$PWD/build/macos-zoom.so"
 
 For a published repository, install through `hyprpm add <repository-url>` and `hyprpm enable macos-zoom`. Add release commit pins to `hyprpm.toml` when the repository has stable release commits.
 
-## Omarchy configuration
+## Hyprland configuration
 
 Copy the relevant parts of [examples/config.lua](examples/config.lua) into your Hyprland configuration. With `raw_scroll = true`, the plugin reads high-resolution wheel/trackpad axis deltas directly while the configured modifier is held. This is the path that gives the responsive, linear macOS-like feel.
 
 [examples/bindings.lua](examples/bindings.lua) contains optional discrete fallbacks plus toggle and reset bindings for `~/.config/hypr/bindings.lua`. You can replace those with any keys you prefer. The raw modifier is separately configurable as `CTRL`, `ALT`, `META`, `SHIFT`, or a `+`-separated combination.
 
-After editing Omarchy’s Hyprland config:
+After editing your Hyprland config:
 
 ```sh
 hyprctl reload

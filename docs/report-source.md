@@ -1,14 +1,14 @@
 # macOS Accessibility Zoom: behavior and implementation findings
 
-Audience: Omarchy and Hyprland plugin implementers  
-Research date: 2026-08-30  
+Audience: Hyprland plugin implementers
+Research date: 2026-08-30
 Scope: macOS system-level Accessibility Zoom, with full-screen modifier-plus-scroll behavior as the first implementation target.
 
 ## Executive answer
 
 The familiar macOS feature is a compositor-level screen magnifier, not application zoom. With “Use scroll gesture with modifier keys to zoom” enabled, holding Control, Option, or Command while scrolling changes magnification. In full-screen mode the entire rendered display is enlarged, and pointer position determines the viewed region according to one of three tracking policies. Apple also supports split-screen and picture-in-picture lenses, keyboard and trackpad activation, keyboard-focus following, temporary detachment, multi-display policies, smoothing, saved zoom, and a screen-sharing policy.
 
-For Omarchy on Hyprland 0.56.2, the correct first implementation is a small native plugin that controls Hyprland’s existing per-monitor animated compositor zoom. It should not re-render the desktop or capture the screen. Hyprland already preserves the world-space point under the cursor while the scale changes, clamps the camera to output bounds, and implements both continuous pointer anchoring and edge-triggered detached-camera panning.
+For Hyprland 0.56.2, the correct first implementation is a small native plugin that controls Hyprland’s existing per-monitor animated compositor zoom. It should not re-render the desktop or capture the screen. Hyprland already preserves the world-space point under the cursor while the scale changes, clamps the camera to output bounds, and implements both continuous pointer anchoring and edge-triggered detached-camera panning.
 
 ## Documented macOS behavior
 
@@ -46,7 +46,7 @@ The plugin also retains multiplicative `in` and `out` actions for keyboards and 
 
 The observable interaction contract—system-wide compositing, cursor anchoring, output-edge clamping, three tracking modes, 1× floor, 40× compatibility ceiling, and independent displays—is the parity target.
 
-## Hyprland and Omarchy mapping
+## Hyprland mapping
 
 Hyprland’s official configuration reference defines `cursor:zoom_factor` as compositor zoom around the cursor, `zoom_rigid` as centered versus loose tracking, and in 0.56.2 also provides `zoom_detached_camera`. See the [Hyprland 0.56 variables reference](https://wiki.hypr.land/0.56.0/Configuring/Basics/Variables/).
 
@@ -58,7 +58,7 @@ The macOS modes map to Hyprland as follows:
 - When Pointer Reaches Edge: `zoom_detached_camera = true`, `zoom_rigid = false`.
 - To Keep Pointer Centered: `zoom_detached_camera = false`, `zoom_rigid = true`.
 
-Current Omarchy user configuration is Lua, and user bindings belong in `~/.config/hypr/bindings.lua`. The plugin exposes both a Hyprland dispatcher and a Lua function so bindings can stay conventional and user-selectable.
+Current Hyprland user configuration supports Lua. The plugin exposes both a Hyprland dispatcher and a Lua function so bindings can stay conventional and user-selectable.
 
 ## Limitations and stopping rule
 
