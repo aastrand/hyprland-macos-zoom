@@ -2,8 +2,6 @@
 
 A native Hyprland plugin for macOS-like full-screen accessibility zoom. It uses Hyprland’s compositor-native zoom camera and leaves bindings in your configuration.
 
-The [research report](docs/report-source.md) defines the parity target and evidence. The [implementation plan](docs/plan.md) separates the implemented full-screen core from later accessibility features.
-
 ## Requirements
 
 - Hyprland 0.56.2 or a source-compatible build with matching installed headers.
@@ -11,6 +9,37 @@ The [research report](docs/report-source.md) defines the parity target and evide
 - Hyprland’s Lua configuration for the provided examples.
 
 Hyprland plugins are ABI-coupled to the compositor build. Rebuild after every Hyprland update.
+
+## Install with HyprPM
+
+```sh
+hyprpm add https://github.com/aastrand/hyprland-macos-zoom.git
+hyprpm enable macos-zoom
+hyprpm reload -n
+```
+
+To load enabled plugins automatically when Hyprland starts, add this to your
+Hyprland Lua configuration:
+
+```lua
+hl.on("hyprland.start", function()
+  hl.exec_cmd("hyprpm reload -n")
+end)
+```
+
+Update and rebuild against the current Hyprland version with:
+
+```sh
+hyprpm update
+hyprpm reload -n
+```
+
+Remove the plugin with:
+
+```sh
+hyprpm disable macos-zoom
+hyprpm remove hyprland-macos-zoom
+```
 
 ## Build and test
 
@@ -39,8 +68,6 @@ Unload with an absolute path; unloading resets every output to 1×.
 ```sh
 hyprctl plugin unload "$PWD/build/macos-zoom.so"
 ```
-
-For a published repository, install through `hyprpm add <repository-url>` and `hyprpm enable macos-zoom`. Add release commit pins to `hyprpm.toml` when the repository has stable release commits.
 
 ## Hyprland configuration
 
