@@ -1,6 +1,9 @@
 [repository]
 name = "hyprland-macos-zoom"
 authors = ["Anders Åstrand"]
+commit_pins = [
+    ["efb50993780079460b0cbed1363e2166a2de1d9f", "be10d081a746fbe56d683f21181ebe9f76e20817"], # Hyprland 0.56.2
+]
 
 [macos-zoom]
 description = "macOS-like full-screen zoom controls for Hyprland"
