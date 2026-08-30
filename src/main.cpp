@@ -312,7 +312,7 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
 
   HyprlandAPI::reloadConfig();
   return {"macos-zoom", "macOS-like full-screen zoom controls for Hyprland",
-          "Anders", "0.1.0"};
+          "Anders Åstrand", "0.1.0"};
 }
 
 APICALL EXPORT void PLUGIN_EXIT() {

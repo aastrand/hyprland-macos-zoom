@@ -1,10 +1,10 @@
 [repository]
 name = "hyprland-macos-zoom"
-authors = ["Anders"]
+authors = ["Anders Åstrand"]
 
 [macos-zoom]
 description = "macOS-like full-screen zoom controls for Hyprland"
-authors = ["Anders"]
+authors = ["Anders Åstrand"]
 output = "build/macos-zoom.so"
 build = [
     "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF",

@@ -1,6 +1,18 @@
 # hyprland-macos-zoom
 
+[![CI](https://github.com/aastrand/hyprland-macos-zoom/actions/workflows/ci.yml/badge.svg)](https://github.com/aastrand/hyprland-macos-zoom/actions/workflows/ci.yml)
+[![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](LICENSE)
+
 A native Hyprland plugin for macOS-like full-screen accessibility zoom. It uses Hyprland’s compositor-native zoom camera and leaves bindings in your configuration.
+
+## Why a plugin?
+
+Hyprland already renders full-screen zoom, but ordinary wheel bindings reduce
+scrolling to discrete `mouse_up` and `mouse_down` events. This plugin listens to
+the compositor's high-resolution axis events directly, maps their full delta to
+the native per-monitor zoom camera, and optionally consumes the modified scroll
+so the focused application does not move at the same time. No daemon or
+per-scroll subprocess is involved.
 
 ## Requirements
 
@@ -108,3 +120,7 @@ All options live below `plugin.macos_zoom` in Lua config:
 ## Current scope
 
 Version 0.1 targets macOS full-screen modifier-plus-wheel behavior with continuous raw input and conventional bindable actions. Split-screen and picture-in-picture lenses, keyboard-focus following, persistent zoom across login, temporary detachment, and capture policy are planned separately because they require different compositor integration.
+
+## License
+
+[BSD-3-Clause](LICENSE)
