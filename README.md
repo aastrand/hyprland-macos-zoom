@@ -5,7 +5,7 @@
 
 A native Hyprland plugin for macOS-like full-screen accessibility zoom. It uses Hyprland’s compositor-native zoom camera and leaves bindings in your configuration.
 
-![Continuous modifier-and-scroll zoom demo](assets/demo.gif)
+![Continuous modifier-and-scroll zoom demo](assets/demo.webp)
 
 ## Why a plugin?
 
