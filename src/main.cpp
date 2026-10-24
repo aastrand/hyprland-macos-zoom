@@ -130,11 +130,16 @@ void onRawAxis(IPointer::SAxisEvent event, Event::SCallbackInfo &info) {
   const auto minimum = config.minimum->value();
   const auto maximum = std::max(minimum, config.maximum->value());
   const auto sensitivity = config.sensitivity->value();
-  auto next = std::clamp(monitor->m_cursorZoom->value() -
-                             static_cast<float>(event.delta) * sensitivity,
-                         minimum, maximum);
-  if (event.delta > 0.0 && next < config.snapThreshold->value())
-    next = minimum;
+  static const CConfigValue<Config::BOOL> touchpadNaturalScroll(
+      "input:touchpad:natural_scroll");
+  static const CConfigValue<Config::BOOL> mouseNaturalScroll("input:natural_scroll");
+  const bool naturalScroll = event.source == WL_POINTER_AXIS_SOURCE_FINGER
+                                 ? *touchpadNaturalScroll
+                                 : *mouseNaturalScroll;
+  const auto next = MacOSZoom::scrollZoom(
+      monitor->m_cursorZoom->value(), static_cast<float>(event.delta),
+      sensitivity, minimum, maximum, config.snapThreshold->value(),
+      naturalScroll);
 
   setZoom(monitor, next, false, true);
   info.cancelled = config.consumeScroll->value();

@@ -104,6 +104,11 @@ Use exactly one of these pairs in `cursor` configuration:
 - macOS “When Pointer Reaches Edge”: `zoom_detached_camera = true`, `zoom_rigid = false`.
 - macOS “To Keep Pointer Centered”: `zoom_detached_camera = false`, `zoom_rigid = true`.
 
+Continuous zoom automatically follows Hyprland's global natural scrolling
+settings: `input:touchpad:natural_scroll` for touchpads and
+`input:natural_scroll` for mouse wheels. Changes apply live. Per-device
+overrides are not detected; normal scrolling is unchanged.
+
 ## Plugin options
 
 All options live below `plugin.macos_zoom` in Lua config:

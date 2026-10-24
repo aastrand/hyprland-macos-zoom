@@ -33,6 +33,7 @@ target_link_libraries(macos-zoom PRIVATE PkgConfig::HYPRLAND_DEPS)
 include(CTest)
 if(BUILD_TESTING)
     add_executable(zoom-math-test tests/zoom_math_test.cpp)
+    target_compile_options(zoom-math-test PRIVATE -UNDEBUG)
     add_test(NAME zoom-math COMMAND zoom-math-test)
 endif()
 
