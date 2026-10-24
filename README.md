@@ -112,6 +112,7 @@ All options live below `plugin.macos_zoom` in Lua config:
 - `modifier`: modifier for raw scrolling; default `CTRL`.
 - `sensitivity`: linear factor change per raw axis unit; default `0.01`.
 - `consume_scroll`: prevent the modified gesture from also scrolling the app; default `true`.
+- `invert_zoom`: reverse which scroll direction zooms in; default `false`.
 - `step`: multiplicative change used by the optional discrete `in`/`out` actions; default `1.20`.
 - `min_factor`: lower bound; default `1.0`.
 - `max_factor`: upper bound; default `40.0`.

@@ -12,6 +12,7 @@ hl.config({
       modifier = "CTRL",
       sensitivity = 0.01,
       consume_scroll = true,
+      invert_zoom = false,
       step = 1.20,
       min_factor = 1.0,
       max_factor = 40.0,

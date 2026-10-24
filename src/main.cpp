@@ -38,6 +38,7 @@ struct SConfig {
   SP<Config::Values::CBoolValue> independentDisplays;
   SP<Config::Values::CBoolValue> rawScroll;
   SP<Config::Values::CBoolValue> consumeScroll;
+  SP<Config::Values::CBoolValue> invertZoom;
   SP<Config::Values::CStringValue> modifier;
 } config;
 
@@ -130,10 +131,11 @@ void onRawAxis(IPointer::SAxisEvent event, Event::SCallbackInfo &info) {
   const auto minimum = config.minimum->value();
   const auto maximum = std::max(minimum, config.maximum->value());
   const auto sensitivity = config.sensitivity->value();
+  const auto delta = config.invertZoom->value() ? -event.delta : event.delta;
   auto next = std::clamp(monitor->m_cursorZoom->value() -
-                             static_cast<float>(event.delta) * sensitivity,
+                             static_cast<float>(delta) * sensitivity,
                          minimum, maximum);
-  if (event.delta > 0.0 && next < config.snapThreshold->value())
+  if (delta > 0.0 && next < config.snapThreshold->value())
     next = minimum;
 
   setZoom(monitor, next, false, true);
@@ -285,6 +287,9 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
   config.consumeScroll = makeShared<Config::Values::CBoolValue>(
       "plugin:macos_zoom:consume_scroll",
       "prevent matching zoom scrolls from reaching applications", true);
+  config.invertZoom = makeShared<Config::Values::CBoolValue>(
+      "plugin:macos_zoom:invert_zoom",
+      "reverse which scroll direction zooms in", false);
   config.modifier = makeShared<Config::Values::CStringValue>(
       "plugin:macos_zoom:modifier", "modifier for continuous raw scroll",
       "CTRL");
@@ -298,6 +303,7 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
   HyprlandAPI::addConfigValueV2(handle, config.independentDisplays);
   HyprlandAPI::addConfigValueV2(handle, config.rawScroll);
   HyprlandAPI::addConfigValueV2(handle, config.consumeScroll);
+  HyprlandAPI::addConfigValueV2(handle, config.invertZoom);
   HyprlandAPI::addConfigValueV2(handle, config.modifier);
 
   if (!HyprlandAPI::addDispatcherV2(handle, "macos-zoom", adjustZoom))
