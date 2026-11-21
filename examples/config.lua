@@ -18,6 +18,9 @@ hl.config({
       snap_threshold = 1.05,
       toggle_factor = 2.0,
       independent_displays = true,
+      invert_touchpad = false,
+      momentum = true,
+      momentum_decay = 300.0,
     },
   },
 })
