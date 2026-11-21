@@ -55,6 +55,21 @@ hyprpm disable macos-zoom
 hyprpm remove hyprland-macos-zoom
 ```
 
+## Install with Nix
+
+The flake provides an overlay that adds `hyprlandPlugins.macos-zoom`, built
+against the Hyprland from your own nixpkgs (it must be 0.56 or newer). For
+example, with Home Manager:
+
+```nix
+# flake inputs
+hyprland-macos-zoom.url = "github:aastrand/hyprland-macos-zoom";
+
+# configuration
+nixpkgs.overlays = [ inputs.hyprland-macos-zoom.overlays.default ];
+wayland.windowManager.hyprland.plugins = [ pkgs.hyprlandPlugins.macos-zoom ];
+```
+
 ## Build and test
 
 ```sh
