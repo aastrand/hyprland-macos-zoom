@@ -118,6 +118,9 @@ All options live below `plugin.macos_zoom` in Lua config:
 - `snap_threshold`: values below this snap to the minimum when zooming out; default `1.05`.
 - `toggle_factor`: initial toggle target before a previous factor exists; default `2.0`.
 - `independent_displays`: affect only the output under the pointer; default `true`.
+- `invert_touchpad`: flip the zoom direction of touchpad scrolling only, e.g. to match macOS with natural scrolling; default `false`.
+- `momentum`: after the fingers leave the touchpad, keep zooming at the gesture's final speed and slow down smoothly; default `true`.
+- `momentum_decay`: time constant of that slowdown in milliseconds; larger glides further; default `300`.
 
 ## Current scope
 
